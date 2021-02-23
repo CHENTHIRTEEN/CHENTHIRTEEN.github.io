@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位非典型计算机专业学生的各种学习日常">
+  <meta name="author" content="CHI">
+  <meta name="keywords" content="">
+  <title>汇编语言（一） - CHENTHIRTEEN</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"chenthirteen.github.io","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>CHENTHIRTEEN的秘密世界</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/15.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="汇编语言（一）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-27 09:55" pubdate>
+        2021年1月27日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">汇编语言（一）</h1>
+            
+            <div class="markdown-body">
+              <h4 id="内存地址空间"><a href="#内存地址空间" class="headerlink" title="内存地址空间"></a>内存地址空间</h4><p><strong>总线分为三类：</strong></p>
+<ul>
+<li>地址总线（AS）</li>
+<li>数据总线（DS）</li>
+<li>控制总线（CS）</li>
+</ul>
+<p><strong>存储器分类</strong></p>
+<ul>
+<li>随机存储器（RAM）：可读可写，必须带电存储，关机后内容丢失。</li>
+<li>只读存储器（ROM）：只读不写，关机后内容不丢失。</li>
+</ul>
+<p><strong><font color="red"> 存储器都与总线相连</font></strong></p>
+<h5 id="内存地址空间大小"><a href="#内存地址空间大小" class="headerlink" title="内存地址空间大小"></a>内存地址空间大小</h5><ul>
+<li>内存地址空间大小收CPU地址总线（AS）宽度限制，8086处理器宽度为20，可以同时传输$2^{20}$个地址信息，范围为0~$2^{20}$-1，即定位$2^{20}$个内存单元，大小为1MB。</li>
+<li>80386总线宽度为32，地址空间最大4GB。</li>
+</ul>
+<h5 id="常用进制转换"><a href="#常用进制转换" class="headerlink" title="常用进制转换"></a>常用进制转换</h5><ul>
+<li>十进制：20000</li>
+<li>十进制：4E20H</li>
+<li>二进制：0100111000100000B</li>
+</ul>
+<p><strong>注：16进制数值范围为0~F（0，1，2，3，4，5，6，7，8，9，A, B, C, D, E, F）,逢16位进1。</strong></p>
+<p>以20000为例，转换为二进制：</p>
+<p>20000 = 16384 + 2048 + 1024 + 512 + 32</p>
+<p>​            = $2^{14}$ + $2^{11}$ + $2^{10}$ + $2^{9}$ + $2^{5}$</p>
+<p>将相应位置的0替换为1即可</p>
+<p class="note note-primary">0<u>1</u>00 <u>111</u>0 00<u>1</u>0 0000</p>
+
+<p><strong>二进制—&gt;十六进制</strong></p>
+<p>将二进制数从右往左（从低位到高位）分为四个一组（不够一组时在左边补0）：</p>
+<p><strong>0100 1110 0010 0000B</strong></p>
+<p>将每组数字转换成对应的十六进制数</p>
+<p><strong>0100 1110 0010 0000B</strong></p>
+<p>​    4        E        2        0    H</p>
+<h4 id="CS和IP"><a href="#CS和IP" class="headerlink" title="CS和IP"></a>CS和IP</h4><ul>
+<li>CS：代码段寄存器</li>
+<li>IP：指令指针寄存器</li>
+</ul>
+<p>8086处理器中，在任意时刻将CS:IP指向的内容当做指令执行。</p>
+<p><img src="/img/huibian/CS&IP.png" srcset="/img/loading.gif"></p>
+<p>在上图中CS的值为1000，IP值为0000，所对应的内存地址为：</p>
+<p class="note note-success">2000H * 16 + 0000 = 20000H</p>
+
+<p>查看对应地址内存：</p>
+<p><img src="/img/huibian/001.png" srcset="/img/loading.gif"></p>
+<p>查看当前寄存器状态：</p>
+<p><img src="/img/huibian/002.png" srcset="/img/loading.gif"></p>
+<p>此时CS:IP所指内存地址为10000H，存放内容为<strong>B83412</strong></p>
+<p><strong>注意：B83412共三个字节，所对应指令为</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">MOV AX,1234<br></code></pre></div></td></tr></table></figure>
+<p><strong>执行后，IP值自动加3.</strong></p>
+<p>执行后再次查看寄存器值：</p>
+<p><img src="/img/huibian/003.png" srcset="/img/loading.gif"></p>
+<p>显然</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">MOV AX,1234<br></code></pre></div></td></tr></table></figure>
+<p>已被执行，AX的值已变成1234，IP值变为0003.</p>
+<p>*<em>CS * 16 + IP = 10003*</em></p>
+<p>此时CS:IP指向的内存中内容为BB0400，对应的汇编指令为</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">MOV BX,0004<br></code></pre></div></td></tr></table></figure>
+<p>执行下一条指令:</p>
+<p><img src="/img/huibian/004.png" srcset="/img/loading.gif"></p>
+<p>继续执行下一条:</p>
+<p><img src="/img/huibian/005.png" srcset="/img/loading.gif"></p>
+<p>上述例子涉及到了MOV指令，MOV指令是汇编语言中的赋值语句，主要用法有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">MOV 寄存器名,操作数 	;将操作数赋值给指定寄存器<br>MOV 寄存器1，寄存器2	;将寄存器2中的内容赋给寄存器1<br></code></pre></div></td></tr></table></figure>
+<p>以上两个用法与C语言中的复制符号=类似：</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">a = <span class="hljs-number">100</span>;<br>b = a<br></code></pre></div></td></tr></table></figure>
+<p>其他用法会在之后介绍。</p>
+<p><strong>注意：MOV指令不能给CS和IP寄存器赋值，修改CS或IP的值需要使用JMP指令。</strong></p>
+<h4 id="JMP指令"><a href="#JMP指令" class="headerlink" title="JMP指令"></a>JMP指令</h4><h5 id="JUM指令可以同时修改CS和IP的内容"><a href="#JUM指令可以同时修改CS和IP的内容" class="headerlink" title="JUM指令可以同时修改CS和IP的内容"></a>JUM指令可以同时修改CS和IP的内容</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">JMP 段地址:偏移地址<br>JMP 2AE3:3 ;CS&#x3D;2AE3H,IP&#x3D;0003H,CS:IP&#x3D;2AE33H<br>JMP 1234:3 ;CS&#x3D;1234H,IP&#x3D;0003H,CS:IP&#x3D;12343H<br></code></pre></div></td></tr></table></figure>
+<h5 id="也可以仅修改IP的内容："><a href="#也可以仅修改IP的内容：" class="headerlink" title="也可以仅修改IP的内容："></a>也可以仅修改IP的内容：</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">JMP 某一合法寄存器<br>JMP AX<br></code></pre></div></td></tr></table></figure>
+<p><strong>执行前：AX=1234H,CS=1000H,IP=0000H</strong></p>
+<p><strong>执行后：AX=1234H,CS=1000H,IP=1234H</strong></p>
+<p><img src="/img/huibian/006.png" srcset="/img/loading.gif"></p>
+<p><strong>由此看出该种用法将寄存器中的内容送入IP</strong></p>
+<h4 id="DEBUG模式常用指令"><a href="#DEBUG模式常用指令" class="headerlink" title="DEBUG模式常用指令"></a>DEBUG模式常用指令</h4><p>由于win10删除了DEBUG模式，本人采用虚拟机运行32位win7进行DEBUG（win7 x64也不支持）</p>
+<h5 id="R指令"><a href="#R指令" class="headerlink" title="R指令"></a>R指令</h5><ul>
+<li>查看寄存器状态</li>
+</ul>
+<p><img src="/img/huibian/007.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>修改寄存器值：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">R 寄存器<br></code></pre></div></td></tr></table></figure>
+<p><img src="/img/huibian/008.png" srcset="/img/loading.gif"></p>
+<h5 id="D指令"><a href="#D指令" class="headerlink" title="D指令"></a>D指令</h5><p>查看指定地址内存的内容</p>
+<p><strong>地址表示为：段地址：偏移地址</strong></p>
+<p>如查看10000H处的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">D 1000:0<br></code></pre></div></td></tr></table></figure>
+<p><img src="/img/huibian/009.png" srcset="/img/loading.gif"></p>
+<p>上图左边为每行的起始地址，中间为十六进制格式输出的指定地址开始的128个内存单元的内容，右边为每个内存单元数据中对应可显示的ASCII值，没有对应值就用**.**代替</p>
+<p>查看某个范围内内存的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ASM">D 段地址:偏移地址1 偏移地址2<br></code></pre></div></td></tr></table></figure>
+
+
+<p><img src="/img/huibian/010.png" srcset="/img/loading.gif"></p>
+<h5 id="E指令"><a href="#E指令" class="headerlink" title="E指令"></a>E指令</h5><p>改写内存中的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asm">E 起始地址:数据 数据 …………<br></code></pre></div></td></tr></table></figure>
+<p><img src="/img/huibian/011.png" srcset="/img/loading.gif"></p>
+<h5 id="A指令"><a href="#A指令" class="headerlink" title="A指令"></a>A指令</h5><p>直接向内存中写入机器指令</p>
+<p><img src="/img/huibian/012.png" srcset="/img/loading.gif"></p>
+<h5 id="U指令"><a href="#U指令" class="headerlink" title="U指令"></a>U指令</h5><p>查看内存中机器码的含义：</p>
+<p><img src="/img/huibian/013.png" srcset="/img/loading.gif"></p>
+<h5 id="T指令"><a href="#T指令" class="headerlink" title="T指令"></a>T指令</h5><p>执行CS:IP所指的内存中的指令</p>
+<p><img src="/img/huibian/014.png" srcset="/img/loading.gif"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/">程序语言</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/29/%E6%AF%8F%E6%97%A5OJ/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">每日OJ</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/26/%E8%AF%81%E4%B9%A6%E7%BB%88%E4%BA%8E%E5%87%BA%E4%BA%86-%E7%BA%AA%E5%BF%B5%E4%B8%80%E4%B8%8B/">
+                        <span class="hidden-mobile">证书终于出了,纪念一下</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'CHENTHIRTEEN/CHENTHIRTEEN.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
