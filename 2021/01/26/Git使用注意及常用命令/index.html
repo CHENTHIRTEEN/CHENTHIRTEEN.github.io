@@ -229,24 +229,20 @@
             
             <div class="markdown-body">
               <h1 id="Git使用注意及常用命令"><a href="#Git使用注意及常用命令" class="headerlink" title="Git使用注意及常用命令"></a>Git使用注意及常用命令</h1><h2 id="git设置用户信息"><a href="#git设置用户信息" class="headerlink" title="git设置用户信息"></a>git设置用户信息</h2><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git config --global user.name <span class="hljs-string">&quot;Your Name&quot;</span></span><br><span class="hljs-meta">$</span><span class="bash"> git config --global user.email <span class="hljs-string">&quot;email@example.com&quot;</span></span><br></code></pre></div></td></tr></table></figure>
-
-<p><em><strong>不带后缀的命令可以查看本机用户信息</strong></em></p>
+<p><strong><em>不带后缀的命令可以查看本机用户信息</em></strong></p>
 <hr>
 <ul>
 <li>将目录变为Git可管理的仓库</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git init</span><br></code></pre></div></td></tr></table></figure>
-
 <h2 id="将文件添加到版本库"><a href="#将文件添加到版本库" class="headerlink" title="将文件添加到版本库"></a>将文件添加到版本库</h2><ul>
 <li>将文件添加到仓库</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git add filename</span><br></code></pre></div></td></tr></table></figure>
-
 <ul>
 <li>将文件提交到仓库</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;提交备注，为了代码规范必填&quot;</span></span><br></code></pre></div></td></tr></table></figure>
-
 <ul>
 <li>git命令必须在git仓库内执行</li>
 <li>注意添加文件时文件是否存在</li>
@@ -256,25 +252,21 @@
 <li>git status命令可以查看仓库当前状态</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">10303@DESKTOP-9B9NUVT MINGW64 /d/myHub/OnlineJudge (master)<br><span class="hljs-meta">$</span><span class="bash"> git status</span><br>On branch master<br>Changes not staged for commit:<br>  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)<br>  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)<br>        modified:   readme.md<br><br>no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)<br><br></code></pre></div></td></tr></table></figure>
-
 <ul>
 <li>查看文件具体被修改的内容</li>
 </ul>
 <p><strong>git diff “filename”</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git diff <span class="hljs-string">&quot;readme.md&quot;</span></span><br>diff --git a/readme.md b/readme.md<br>index c8a8781..699d945 100644<br>--- a/readme.md<br>+++ b/readme.md<br>@@ -1,2 +1,7 @@<br><span class="hljs-meta"> #</span><span class="bash"> 记录本人不定期的OJ刷题记录</span><br><br>+##### 目前已有<br>+<br>++ LuoGu<br>++ AcWing<br>++ PTA<br>\ No newline at end of file<br><br></code></pre></div></td></tr></table></figure>
-
 <hr>
 <h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h4><ul>
 <li>查看历史纪录</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span></span><br>commit bbedeb9a6cced4d2ec9449525af3d1d487e5eedf (HEAD -&gt; master)<br>Author: CHENTHIRTEEN &lt;1030339437@qq.com&gt;<br>Date:   Tue Jan 26 13:06:06 2021 +0800<br><br>    add som distributed<br><br>commit 7d599a92c034fed30e7c75539503189a19e269ec<br>Author: CHENTHIRTEEN &lt;1030339437@qq.com&gt;<br>Date:   Tue Jan 26 13:03:44 2021 +0800<br><br>    add som distributed<br><br>commit c71a269f75f080bfd168ea2e14c586d6a93e49f6<br>Author: CHENTHIRTEEN &lt;1030339437@qq.com&gt;<br>Date:   Tue Jan 26 12:39:36 2021 +0800<br><br>    add a readme file<br><br></code></pre></div></td></tr></table></figure>
-
 <p><font color="red">git log</font>从最近到最远显示提交日志</p>
 <ul>
-<li>带–pretty=oneline参数</li>
+<li>带—pretty=oneline参数</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --pretty=oneline</span><br>bbedeb9a6cced4d2ec9449525af3d1d487e5eedf (HEAD -&gt; master) add som distributed<br>7d599a92c034fed30e7c75539503189a19e269ec add som distributed<br>c71a269f75f080bfd168ea2e14c586d6a93e49f6 add a readme file<br><br></code></pre></div></td></tr></table></figure>
-
 <ul>
 <li><p><strong>git中HEAD表示当前版本上个版本为HEAD^N个版本为HEAD~N</strong></p>
 </li>
@@ -282,23 +274,19 @@
 </li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git reset --hard HEAD~2</span><br>HEAD is now at c71a269 add a readme file<br></code></pre></div></td></tr></table></figure>
-
 <ul>
 <li>回退后再次使用git log</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span></span><br>commit c71a269f75f080bfd168ea2e14c586d6a93e49f6 (HEAD -&gt; master)<br>Author: CHENTHIRTEEN &lt;1030339437@qq.com&gt;<br>Date:   Tue Jan 26 12:39:36 2021 +0800<br><br>    add a readme file<br></code></pre></div></td></tr></table></figure>
-
 <ul>
 <li>窗口未关闭可以使用commit id回到某个版本</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git reset --hard bbedeb</span><br></code></pre></div></td></tr></table></figure>
-
 <p>commit id取前几位即可</p>
 <ul>
 <li>若关闭了窗口可以通过git reflog查看记录的每一次命令</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git reflog</span><br>c71a269 (HEAD -&gt; master) HEAD@&#123;0&#125;: reset: moving to HEAD~2<br>bbedeb9 HEAD@&#123;1&#125;: commit: add som distributed<br>7d599a9 HEAD@&#123;2&#125;: commit: add som distributed<br>c71a269 (HEAD -&gt; master) HEAD@&#123;3&#125;: commit (initial): add a readme file<br></code></pre></div></td></tr></table></figure>
-
 
             </div>
             <hr>

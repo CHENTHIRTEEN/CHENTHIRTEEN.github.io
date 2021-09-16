@@ -18,7 +18,7 @@
   <meta name="author" content="CHI">
   <meta name="keywords" content="">
   
-  <title>测试 - CHENTHIRTEEN</title>
+  <title>机器学习（一） - CHENTHIRTEEN</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="测试">
+            <span class="h2" id="subtitle" title="机器学习（一）">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-03-25 09:36" pubdate>
-        2020年3月25日 上午
+      <time datetime="2021-09-16 14:20" pubdate>
+        2021年9月16日 下午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      12 字
+      541 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      7
        分钟
     </span>
   
@@ -225,16 +225,95 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">测试</h1>
+            <h1 style="display: none">机器学习（一）</h1>
             
             <div class="markdown-body">
-              <h1 id="这是一个测试页面"><a href="#这是一个测试页面" class="headerlink" title="这是一个测试页面"></a>这是一个测试页面</h1><p><strong><em>欢迎来玩</em></strong></p>
-
+              <p><em>听课时候随手记的，并没有想让大家看懂的意思  ：)</em></p>
+<p>机器学习流程：</p>
+<pre><code class=" mermaid">graph LR;
+数据搜集 --&gt; 数据清洗 --&gt; 特征工程 --&gt; 数据建模
+</code></pre>
+<p>前三个部分日常最多80%-90%时间</p>
+<p>数学建模需要最多的知识</p>
+<h3 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h3><ul>
+<li>回归问题：标签连续</li>
+<li>分类问题：标签离散</li>
+</ul>
+<h2 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h2><h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><ul>
+<li>线性模型</li>
+<li>找到直线、平面、或者超平面是的预测值与真实值之间误差最小</li>
+<li>距离为0则完全拟合</li>
+</ul>
+<h3 id="符号约定"><a href="#符号约定" class="headerlink" title="符号约定"></a>符号约定</h3><ul>
+<li><strong>m：训练集中的样本数量</strong></li>
+<li><strong>n：特征数量</strong></li>
+<li><strong>x：特征/输入变量</strong></li>
+<li><strong>y：目标变量/输出变量</strong></li>
+<li><strong>（x， y）：训练集中的样本</strong></li>
+</ul>
+<p>默认为列向量</p>
+<ul>
+<li><strong>$x^{(i)}$：特征矩阵中的第i行（默认为列向量）</strong></li>
+<li><strong>$x^{(i)}_j$：矩阵中第i行第j个特征</strong></li>
+<li><strong>$h：$代表学习算法的解决方案或函数也成为假设</strong></li>
+<li><strong>$\widehat{y}=h(x) $：代表预测值</strong></li>
+<li><strong>$h：$假设</strong></li>
+</ul>
+<h4 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h4><script type="math/tex; mode=display">
+h(x) = w_0 + w_1x_1 + w_2x_2 + ... + w_nx_n</script><ul>
+<li>找到一组</li>
+</ul>
+<script type="math/tex; mode=display">
+w(w_0, w_1, w_2,..., w_n)</script><ul>
+<li>使得残差平方和</li>
+</ul>
+<script type="math/tex; mode=display">
+J(w) = \frac{1}{2} {\textstyle \sum_{i = 1}^{m}}(h(x^{(i)}) - y^{(i)})^{2}</script><p>最小，即最小化$\frac{\partial J(w)}{\partial w}.$</p>
+<ul>
+<li>将上式转换为矩阵形式</li>
+</ul>
+<script type="math/tex; mode=display">
+J(w) = \frac{1}{2}(Xw - Y)^{2}</script><ul>
+<li>其中$X$为$m$行$n+1$列的矩阵（$m为样本个数， n为特征个数$）</li>
+<li>$w为n+1行1列的矩阵（包含w_0）,Y为m行1列的矩阵$</li>
+</ul>
+<p><strong>根据向量的性质：</strong></p>
+<script type="math/tex; mode=display">
+\sum_{i}Z_{i}^2 = Z^TZ</script><p><strong>可以得到：</strong></p>
+<script type="math/tex; mode=display">
+J(w) = \frac{1}{2}(Xw - Y)^{2} = \frac{1}{2}(Xw - Y)^{T}(Xw - Y)</script><p><strong>未来最小化$J(w)$，对其求偏导：</strong></p>
+<script type="math/tex; mode=display">
+\frac{\partial J(w)}{\partial w} = \frac{1}{2} \frac{\partial}{\partial w} (Xw - Y)^T(Xw - Y) = \frac{1}{2} \frac{\partial}{\partial w} (w^TX^TXw - {\color{Red} Y^TXw  - w^TX^TY} + Y^TY)</script><p><strong>红色两项互为转置</strong></p>
+<script type="math/tex; mode=display">
+\frac{\partial J(w)}{\partial w} = \frac{1}{2} \frac{\partial}{\partial w}  (w^TX^TXw - 2w^TX^TY + Y^TY) = \frac{1}{2}(2X^TXw - 2X^Ty + 0)\\=X^TXw - X^Ty</script><script type="math/tex; mode=display">
+令 \frac{\partial J(w)}{\partial w} = 0</script><p>则有</p>
+<script type="math/tex; mode=display">
+w = (X^TX)^{-1}X^Ty</script><p><strong><em>注意以下法则</em></strong></p>
+<script type="math/tex; mode=display">
+\frac{dX^TX}{dX} = 2X</script><script type="math/tex; mode=display">
+\frac{dAX}{dX}</script><script type="math/tex; mode=display">
+\frac{\partial X^TAX}{\partial X} = (A + A^T)X,    若A为对称矩阵， \frac{\partial X^TAX}{\partial X} = 2AX</script>
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                  </div>
                 
               </div>
               
@@ -249,15 +328,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/26/Git%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Git使用注意及常用命令</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2021/08/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/">
+                        <span class="hidden-mobile">操作系统入门（一）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -462,9 +541,55 @@
 
 
 
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
 
 
 
